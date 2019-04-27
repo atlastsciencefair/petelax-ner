@@ -26,7 +26,7 @@ def read_temp():
         temp_string = lines[1][equals_pos+2:]
         temp_c = float(temp_string) / 1000.0
         return temp_c
-	
+    
 
 
 car_on = True
@@ -34,17 +34,19 @@ temp = read_temp
 i = 0
 while car_on == True:
     i += 1
-	if read_temp() >= 0: 
-	    conn = http.client.HTTPSConnection("api.pushover.net:443")
-	    conn.request("POST", "/1/messages.json",
-		    urllib.parse.urlencode({
-		    "token": "aajaiutjvx1fwdqy15g2nqcp6av8dt",
-		    "user": "usqmx1mv4pams23f4nq8igh5a7okzf",
-		    "message": "Your vehicle has reached a DANGEROUS temperature. Please return to your vehicle",
-		    }), { "Content-type": "application/x-www-form-urlencoded" })
-	    conn.getresponse()
-	if i >= 5
-	    spam = input("would you like to continue to spam: ")
-	    if spam.rstrip() == "yes":
-		exit()
-	    
+    #change the number after >= to change temperature that alert the phone at.
+    if read_temp() >= 0:
+        conn = http.client.HTTPSConnection("api.pushover.net:443")
+        conn.request("POST", "/1/messages.json",
+            urllib.parse.urlencode({
+                "token": "aajaiutjvx1fwdqy15g2nqcp6av8dt",
+                "user": "usqmx1mv4pams23f4nq8igh5a7okzf",
+	        "message": "Your vehicle has reached a DANGEROUS temperature. Please return to your vehicle.",
+            }), { "Content-type": "application/x-www-form-urlencoded" })
+        conn.getresponse()
+    if i >= 1:
+        #spam = input("would you like to continue to spam: ")
+        #if spam.strip() == "no" or "n":
+        exit()
+        
+	
